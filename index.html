@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1271px;
+            height: 772px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/snapped_jalan_1.js"></script>
+        <script src="data/Joinedlayer_2.js"></script>
+        <script src="data/Halte_fixHalte_3.js"></script>
+        <script src="data/Halte_fixHalte_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.351435704392753,112.6930052467195],[-7.224634350798893,112.90143327942307]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_snapped_jalan_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bridge'] !== null ? autolinker.link(feature.properties['bridge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tunnel'] !== null ? autolinker.link(feature.properties['tunnel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['width'] !== null ? autolinker.link(feature.properties['width'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['highway'] !== null ? autolinker.link(feature.properties['highway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['surface'] !== null ? autolinker.link(feature.properties['surface'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['railway'] !== null ? autolinker.link(feature.properties['railway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['oneway'] !== null ? autolinker.link(feature.properties['oneway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['smoothness'] !== null ? autolinker.link(feature.properties['smoothness'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_snapped_jalan_1_0() {
+            return {
+                pane: 'pane_snapped_jalan_1',
+                opacity: 1,
+                color: 'rgba(255,158,23,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_snapped_jalan_1');
+        map.getPane('pane_snapped_jalan_1').style.zIndex = 401;
+        map.getPane('pane_snapped_jalan_1').style['mix-blend-mode'] = 'normal';
+        var layer_snapped_jalan_1 = new L.geoJson(json_snapped_jalan_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_snapped_jalan_1',
+            layerName: 'layer_snapped_jalan_1',
+            pane: 'pane_snapped_jalan_1',
+            onEachFeature: pop_snapped_jalan_1,
+            style: style_snapped_jalan_1_0,
+        });
+        bounds_group.addLayer(layer_snapped_jalan_1);
+        map.addLayer(layer_snapped_jalan_1);
+        function pop_Joinedlayer_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cost_level'] !== null ? autolinker.link(feature.properties['cost_level'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['qneat_cost_level'] !== null ? autolinker.link(feature.properties['qneat_cost_level'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['qneat_WADMKC'] !== null ? autolinker.link(feature.properties['qneat_WADMKC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['qneat_Luas Area'] !== null ? autolinker.link(feature.properties['qneat_Luas Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Joinedlayer_2_0(feature) {
+            switch(String(feature.properties['qneat_cost_level'])) {
+                case '400.0':
+                    return {
+                pane: 'pane_Joinedlayer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,231,37,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '800.0':
+                    return {
+                pane: 'pane_Joinedlayer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,183,121,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1200.0':
+                    return {
+                pane: 'pane_Joinedlayer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,104,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Joinedlayer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,1,84,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Joinedlayer_2');
+        map.getPane('pane_Joinedlayer_2').style.zIndex = 402;
+        map.getPane('pane_Joinedlayer_2').style['mix-blend-mode'] = 'normal';
+        var layer_Joinedlayer_2 = new L.geoJson(json_Joinedlayer_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Joinedlayer_2',
+            layerName: 'layer_Joinedlayer_2',
+            pane: 'pane_Joinedlayer_2',
+            onEachFeature: pop_Joinedlayer_2,
+            style: style_Joinedlayer_2_0,
+        });
+        bounds_group.addLayer(layer_Joinedlayer_2);
+        map.addLayer(layer_Joinedlayer_2);
+        function pop_Halte_fixHalte_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field1'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field2'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field3'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field4'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field5'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field5'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte_Name,Koridor,Jenis,Layanan,Provider,fid'] !== null ? autolinker.link(feature.properties['Deskripsi Halte_Name,Koridor,Jenis,Layanan,Provider,fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Halte_fixHalte_3_0() {
+            return {
+                pane: 'pane_Halte_fixHalte_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,14,14,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Halte_fixHalte_3');
+        map.getPane('pane_Halte_fixHalte_3').style.zIndex = 403;
+        map.getPane('pane_Halte_fixHalte_3').style['mix-blend-mode'] = 'normal';
+        var layer_Halte_fixHalte_3 = new L.geoJson(json_Halte_fixHalte_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Halte_fixHalte_3',
+            layerName: 'layer_Halte_fixHalte_3',
+            pane: 'pane_Halte_fixHalte_3',
+            onEachFeature: pop_Halte_fixHalte_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Halte_fixHalte_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Halte_fixHalte_3);
+        map.addLayer(layer_Halte_fixHalte_3);
+        function pop_Halte_fixHalte_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field1'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field2'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field3'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field4'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Deskripsi Halte — Sheet1_Field5'] !== null ? autolinker.link(feature.properties['Deskripsi Halte — Sheet1_Field5'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Halte_fixHalte_4_0() {
+            return {
+                pane: 'pane_Halte_fixHalte_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Halte_fixHalte_4');
+        map.getPane('pane_Halte_fixHalte_4').style.zIndex = 404;
+        map.getPane('pane_Halte_fixHalte_4').style['mix-blend-mode'] = 'normal';
+        var layer_Halte_fixHalte_4 = new L.geoJson(json_Halte_fixHalte_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Halte_fixHalte_4',
+            layerName: 'layer_Halte_fixHalte_4',
+            pane: 'pane_Halte_fixHalte_4',
+            onEachFeature: pop_Halte_fixHalte_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Halte_fixHalte_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Halte_fixHalte_4);
+        map.addLayer(layer_Halte_fixHalte_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Halte_fixHalte_4.png" /> Halte_fix — Halte': layer_Halte_fixHalte_4,'<img src="legend/Halte_fixHalte_3.png" /> Halte_fix — Halte': layer_Halte_fixHalte_3,'Joined layer<br /><table><tr><td style="text-align: center;"><img src="legend/Joinedlayer_2_4000.png" /></td><td>400</td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_2_8001.png" /></td><td>800</td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_2_12002.png" /></td><td>1200</td></tr><tr><td style="text-align: center;"><img src="legend/Joinedlayer_2_3.png" /></td><td></td></tr></table>': layer_Joinedlayer_2,'<img src="legend/snapped_jalan_1.png" /> snapped_jalan': layer_snapped_jalan_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
